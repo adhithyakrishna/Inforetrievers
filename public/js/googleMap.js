@@ -118,7 +118,7 @@ class GoogleMap {
           for (const [i, value] of resp.facet_counts.facet_fields[
             "user.location"
           ].entries()) {
-            console.log("%d: %s", i, value);
+            // console.log("%d: %s", i, value);
             if (typeof value == "string") {
               this.coordinates[value.toLowerCase()] =
                 resp.facet_counts.facet_fields["user.location"][i + 1];
@@ -126,7 +126,7 @@ class GoogleMap {
           }
           this.getCoordinatesForEveryLocation().then(data => {
             resolve(data);
-            console.log(JSON.stringify(this.coordinates));
+            // console.log(JSON.stringify(this.coordinates));
           });
         });
     });
@@ -157,7 +157,7 @@ class GoogleMap {
           for (const [i, value] of resp.facet_counts.facet_fields[
             "user.location"
           ].entries()) {
-            console.log("%d: %s", i, value);
+            // console.log("%d: %s", i, value);
             if (typeof value == "string") {
               if (resp.facet_counts.facet_fields["user.location"][i + 1] != 0) {
                 results[value.toLowerCase()] =
@@ -247,10 +247,10 @@ class GoogleMap {
           .then(res => res.json())
           .then(resp => {
             if (resp.results[0]) {
-              console.log(resp.results[0].geometry.location);
+              // console.log(resp.results[0].geometry.location);
               this.coordinates[val] = resp.results[0].geometry.location;
             } else {
-              console.log(resp);
+              // console.log(resp);
             }
             resolve(resp);
           });

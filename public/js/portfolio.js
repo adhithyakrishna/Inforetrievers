@@ -263,7 +263,7 @@ $(document).ready(function() {
 
     constructor() {}
     getTranslatedTextInternal(text, language) {
-      console.log("getting translated Text");
+      // console.log("getting translated Text");
       let data = {
         q: text,
         target: language,
@@ -290,7 +290,7 @@ $(document).ready(function() {
 
     getTranslatedText(text, language) {
       return this.getTranslatedTextInternal(text, language).then(res => {
-        console.log("Returned Translated Text: ", res);
+        // console.log("Returned Translated Text: ", res);
         return res;
       });
     }
@@ -309,14 +309,14 @@ $(document).ready(function() {
       return new Promise((resolve, reject) => {
         Window.CustomTranslator.getTranslatedText(text, "en").then(res => {
           englishText = "(" + encodeURIComponent(res.text) + ")";
-          console.log(englishText);
-          console.log(encodeURIComponent(res.text));
+          // console.log(englishText);
+          // console.log(encodeURIComponent(res.text));
           Window.CustomTranslator.getTranslatedText(text, "hi").then(res => {
             hindiText = "(" + encodeURIComponent(res.text) + ")";
-            console.log(hindiText);
+            // console.log(hindiText);
             Window.CustomTranslator.getTranslatedText(text, "pt").then(res => {
               portugueseText = "(" + encodeURIComponent(res.text) + ")";
-              console.log(portugueseText);
+              // console.log(portugueseText);
               resolve({
                 text: encodeURIComponent(text),
                 englishText: englishText,

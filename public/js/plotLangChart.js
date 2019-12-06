@@ -17,14 +17,14 @@ class plotLanguageChart{
               }else{
                   resolve(false);
               }
-              console.log(inurl);
+              //console.log(inurl);
               return fetch(inurl, {
                 mode: "cors"
               })
                 .then(res => res.json())
                 .then(resp => {
                   for (const [i, value] of resp.facet_counts.facet_fields.tweet_lang.entries()) {
-                    console.log('%d: %s', i, value);
+                    //console.log('%d: %s', i, value);
                     if( (typeof value) == "string" &&( value.toLowerCase() == "en" || value.toLowerCase() == "hi" || value.toLowerCase() == "pt")){
                        result[value.toLowerCase()] = resp.facet_counts.facet_fields.tweet_lang[i+1];
                     }else if((typeof value) == "string" &&( value.toLowerCase() != "en" || value.toLowerCase() != "hi" || value.toLowerCase() != "pt")){

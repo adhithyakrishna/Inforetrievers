@@ -17,7 +17,7 @@ class plotCountryChart{
               }else{
                   resolve(false);
               }
-              console.log(inurl);
+              // console.log(inurl);
               return fetch(inurl, {
                 mode: "cors"
               })

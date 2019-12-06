@@ -93,7 +93,7 @@ buildChart(data,query) {
       }else{
         resolve(false);
       }
-      console.log(inurl);
+      // console.log(inurl);
       return fetch(inurl, {
         mode: "cors"
       })
@@ -107,7 +107,7 @@ buildChart(data,query) {
 }
 
 findDateItemPresence(dataObj,dateObj){
-  console.log("checking dataItem presence")
+  //console.log("checking dataItem presence")
   let result = dataObj.data.find(
       dateitem =>
       new Date(dateitem[0]).getDay()== dateObj.getDay() &&
@@ -125,8 +125,8 @@ populateModel(docs){
         for (var doc of docs) {
           let dateObj = new Date(doc["created_at"]);
           if(doc["created_at"]){
-            console.log(doc["created_at"]);
-            console.log(dateObj);
+            //console.log(doc["created_at"]);
+            //console.log(dateObj);
             let subModel = {
               day: 0,
               month: 0,

@@ -13,7 +13,7 @@ $(document).ready(function() {
 	
 		}
 		getTranslatedTextInternal(text,language){
-			console.log("getting translated Text");
+			// console.log("getting translated Text");
 			let data = {
 				"q": text,
 				"target":language,
@@ -31,7 +31,7 @@ $(document).ready(function() {
 	
 		getTranslatedText(text,language){
 			return this.getTranslatedTextInternal(text,language).then(res =>{
-				console.log("Returned Translated Text: ", res)
+				console.log(language+" : " + JSON.stringify(res))
 				return res;
 			});
 		}
@@ -50,7 +50,8 @@ class HashTagSearch {
     searchSolr(hashtageName, start, rows)
     {
         return new Promise((resolve,reject)=>{
-            let inurl = 'http://3.15.172.27:8984/solr/IRF19P4/select?q={!term f%3Dmentions}' + hashtageName +'&rows='+rows+'&start='+start;
+            console.log(decodeURIComponent('q={!term f%3Dmentions} ' + hashtageName))
+            let inurl = 'http://3.15.172.27:8984/solr/IRF19P4/select?q={!term f%3Dmentions}' + hashtageName +'&defType=edismax&qf=tweet_text'+'&rows='+rows+'&start='+start;
              fetch(inurl,{
                 mode: "cors"
             }).then(res=>res.json()).then(resp=>{
@@ -98,14 +99,14 @@ class QuerySolrSearch{
             return new Promise((resolve,reject)=>{
                 Window.CustomTranslatorSearch.getTranslatedText(text,"en").then(res=>{
                     englishText = "(" + encodeURIComponent(res.text) + ")"
-                    console.log(englishText);
-                    console.log(encodeURIComponent(res.text));
+                    // console.log(englishText);
+                    // console.log(encodeURIComponent(res.text));
                     Window.CustomTranslatorSearch.getTranslatedText(text,"hi").then(res=>{
                         hindiText = "(" + encodeURIComponent(res.text) + ")"
-                        console.log(hindiText);
+                        // console.log(hindiText);
                         Window.CustomTranslatorSearch.getTranslatedText(text,"pt").then(res=>{
                             portugueseText = "(" + encodeURIComponent(res.text) + ")"
-                            console.log(portugueseText);
+                            // console.log(portugueseText);
                             let data = this.querySolr(text,englishText, hindiText, portugueseText,res.srcLang, start, rows, country).then(data=>{
                                 resolve(data);
                             });
@@ -121,6 +122,7 @@ class QuerySolrSearch{
                 Window.CustomTranslatorSearch.getTranslatedText(text,"en").then(res=>{
                     if(res.srcLang=="en")
                     {
+                        console.log(decodeURIComponent(originaltext));
                         let data = this.querySolr(text, englishText, null, null, res.srcLang, start, rows, country, true, lang, originaltext).then(data=>{
                             resolve(data);
                         });
@@ -128,7 +130,7 @@ class QuerySolrSearch{
                     else {
                         
                         commonText = "(" + encodeURIComponent(originaltext) + ")" + " OR " + "(" + encodeURIComponent(res.text) + ")";
-                        console.log(portugueseText);
+                        console.log(decodeURIComponent(commonText));
                         let data = this.querySolr(text, englishText, null, null, res.srcLang, start, rows, country, true, lang, commonText).then(data=>{
                             resolve(data);
                         });
@@ -146,6 +148,7 @@ class QuerySolrSearch{
 
                 if(res.srcLang=="hi")
                 {
+                    console.log(decodeURIComponent(originaltext));
                     let data = this.querySolr(text, englishText, null, null, res.srcLang, start, rows, country, true, lang, originaltext).then(data=>{
                         resolve(data);
                     });
@@ -153,7 +156,7 @@ class QuerySolrSearch{
                 else {
                     
                     commonText = "(" + encodeURIComponent(originaltext) + ")" + " OR " + "(" + encodeURIComponent(res.text) + ")" ;
-                    console.log(portugueseText);
+                    console.log(decodeURIComponent(commonText));
                     let data = this.querySolr(text, englishText, null, null, res.srcLang, start, rows, country, true, lang, commonText).then(data=>{
                         resolve(data);
                     });
@@ -171,6 +174,7 @@ class QuerySolrSearch{
                
                 if(res.srcLang=="pt")
                 {
+                    console.log(decodeURIComponent(originaltext));
                     let data = this.querySolr(text, englishText, null, null, res.srcLang, start, rows, country, true, lang, originaltext).then(data=>{
                         resolve(data);
                     });
@@ -178,7 +182,7 @@ class QuerySolrSearch{
                 else {
                     
                     commonText = "(" + encodeURIComponent(originaltext) + ")" + " OR " + "(" + encodeURIComponent(res.text) + ")" ;
-                    console.log(portugueseText);
+                    console.log(decodeURIComponent(commonText));
                     let data = this.querySolr(text, englishText, null, null, res.srcLang, start, rows, country, true, lang, commonText).then(data=>{
                         resolve(data);
                     });
@@ -193,8 +197,9 @@ class QuerySolrSearch{
     querySolr(defaultText,englishText,hindiText,portugueseText,srcLang,start,rows, country, isFromSpecificSearch, lang, commonText){
         if(isFromSpecificSearch)
         {
+            console.log(decodeURIComponent(commonText))
             return new Promise((resolve,reject)=>{
-                let inurl = 'http://3.15.172.27:8984/solr/'+ "IRF19P4" + '/select?&qf=tweet_text&defType=dismax&q='+ commonText+'&rows='+rows+'&start='+ start + ((country!=null) ? '&fq=country:' + country : '') + ((lang!=null) ? '&fq=lang:'+ lang : ' ');
+                let inurl = 'http://3.15.172.27:8984/solr/'+ "IRF19P4" + '/select?&qf=tweet_text&defType=edismax&q='+ commonText+'&rows='+rows+'&start='+ start + ((country!=null) ? '&fq=country:' + country : '') + ((lang!=null) ? '&fq=lang:'+ lang : ' ');
                  fetch(inurl,{
                     mode: "cors"
                 }).then(res=>res.json()).then(resp=>{
@@ -236,8 +241,9 @@ class QuerySolrSearch{
                 query = englishText + "^" + boostFactorEn + " OR " + hindiText + "^" + boostFactorHi +
             " OR " + portugueseText + "^" + boostFactorPt;
             }
+            console.log(decodeURIComponent(query))
             return new Promise((resolve,reject)=>{
-                let inurl = 'http://3.15.172.27:8984/solr/'+ "IRF19P4" + '/select?q=tweet_text:' + query+'&rows='+rows+'&start='+start + ((country!=null) ? '&fq=country:' + country : '');
+                let inurl = 'http://3.15.172.27:8984/solr/'+ "IRF19P4" + '/select?defType=edismax&qf=tweet_text&q=' + query+'&rows='+rows+'&start='+start + ((country!=null) ? '&fq=country:' + country : '');
                 fetch(inurl,{
                     mode: "cors"
                 }).then(res=>res.json()).then(resp=>{
@@ -258,7 +264,7 @@ $("input:checkbox").on('click', function() {
     // in the handler, 'this' refers to the box clicked on
     $(".previous").attr("pageno","0");
     var $box = $(this);
-    console.log($(this).parent().text());
+    // console.log($(this).parent().text());
     if ($box.is(":checked")) {
       // the name of the box is retrieved using the .attr() method
       // as it is assumed and expected to be immutable

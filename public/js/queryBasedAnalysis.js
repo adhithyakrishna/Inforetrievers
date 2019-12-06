@@ -83,7 +83,6 @@ $(document).ready(function() {
       p4 = Window.sentimentAnalysis.buildChart(data, query);
       p5 = Window.GoogleMap.getLocationsOnSolrOnQuery(data, query);
       Promise.all([p1, p2, p3, p4, p5]).then(results => {
-        setTimeout(() => {
           let val = true;
           for(let index in results){
             val = val && results[index];
@@ -98,7 +97,6 @@ $(document).ready(function() {
             $(".noData").addClass("noDataVisible");
             // $("#queryBasedSubGraphContainer").removeClass("queryBasedSubGraphContainerVisible");
           }
-        }, 500);
       });
   }
 });
