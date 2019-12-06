@@ -329,6 +329,13 @@ $(".next").unbind('click').bind('click', function(event)
     
 });
 
+$('#search-bar').unbind('click').bind('click', function (event)
+{
+    if (event.keyCode === 13) {
+        $(".search").click();
+    }
+});
+
 $(".search").bind('click', function(event) {
 
     $(".buttonHolders").removeClass('hideit');
