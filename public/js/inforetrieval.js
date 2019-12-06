@@ -329,12 +329,14 @@ $(".next").unbind('click').bind('click', function(event)
     
 });
 
-$('#search-bar').unbind('click').bind('click', function (event)
-{
-    if (event.keyCode === 13) {
-        $(".search").click();
+document.getElementById('search-bar').onkeypress = function(e){
+    if (!e) e = window.event;
+    var keyCode = e.keyCode || e.which;
+    if (keyCode == '13'){
+        $(".search").trigger('click');
+      return false;
     }
-});
+  }
 
 $(".search").bind('click', function(event) {
 
