@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Adhithyakrishna</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" href="static/img/favicon.ico" type="image/x-icon" />
+	<script type='text/javascript' src='/static/js/jquery.min.js'></script>
+	<link rel="stylesheet" type="text/css" href="/static/css/style.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+	<script src="https://code.highcharts.com/highcharts.js"></script>
+	<script src="https://code.highcharts.com/modules/series-label.js"></script>
+	<script src="https://code.highcharts.com/modules/exporting.js"></script>
+	<script type='text/javascript' src='/static/js/portfolio.js'></script>
+	<script type='text/javascript' src='/static/js/plotCountryChart.js'></script>
+	<script type='text/javascript' src='/static/js/plotLangChart.js'></script>
+	<script type='text/javascript' src='/static/js/plotTimelineChart.js'></script>
+	<script type='text/javascript' src='/static/js/sentimentAnalysis.js'></script>
+	<script type='text/javascript' src='/static/js/queryBasedAnalysis.js'></script>
+	<script type='text/javascript' src='/static/js/inforetrieval.js'></script>
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+	<script type="text/javascript">
+		google.charts.load('current', { 'packages': ['corechart'] });
+		google.charts.load('current', { 'packages': ['annotatedtimeline'] });
+		setTimeout(() => {
+			google.charts.setOnLoadCallback(Window.DrawAllCharts.staticChart());
+		}, 1000)
+		function initMap() {
+
+		}
+	</script>
+	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5QUXpymXW15M8Rc78Ke0PLCUddaVFvcI&callback=initMap"></script>
+	<script type='text/javascript' src='/static/js/googleMap.js'></script>
+	<style>
+		@import url('https://fonts.googleapis.com/css?family=Amaranth|Crete+Round');
+	</style>
+</head>
+
+
+<body>
+	<div class="content-frame">
+		<div class="contentHolder">
+			<div clas="loaderImage"></div>
+			{{{body}}}
+		</div>
+	</div>
+</body>
+
+</html>

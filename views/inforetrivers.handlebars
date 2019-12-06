@@ -1,0 +1,109 @@
+<div class="surround">
+  {{!-- <div class="facetedSearch">
+       Faceted Search
+  </div> --}}
+  <div class="trending">
+    <div class="trendingholders">
+      <img src="/static/img/logo.png" alt="Paris" class="center">
+      <div class="card text-center">
+  <div class="card-header">
+    Trending Mentions
+  </div>
+  <div class="card-body">
+      <button type="button" name ="donald%20j.%20trump" class="btn btn-primary hash">Donald Trump</button>
+      <button type="button" name ="marcelo%20freixo" class="btn btn-primary hash">Marcelo freixo</button>
+      <button type="button" name ="narendra%20modi" class="btn btn-primary hash">Narendra Modi</button>
+      <button type="button" name ="joe%20biden" class="btn btn-primary hash">Joe biden</button>
+      <button type="button" name ="eduardo%20bolsonaro🇧🇷" class="btn btn-primary hash">Eduardo bolsonaro</button>
+    </div>
+    </div>
+  </div>
+  <div class="holderProfileInfo">
+    <form class="search-container">
+      <input type="text" id="search-bar" placeholder="Please enter your search query">
+      <div class="search"><img class="search-icon"
+          src="http://www.endlessicons.com/wp-content/uploads/2012/12/search-icon.png"></div>
+    </form>
+  </div>
+    <div class="radioHolders">
+    <div class="radioContainers">
+        <div class="radioCountry">
+          <div class="title">Country</div>
+          <div class="CountryHolder">
+            <label>
+              <input type="checkbox" class="radio" value="USA" name="fooby[1][]" />United States</label>
+            <label>
+              <input type="checkbox" class="radio" value="India" name="fooby[1][]" />India</label>
+            <label>
+              <input type="checkbox" class="radio" value="Brazil" name="fooby[1][]" />Brazil</label>
+            </div>
+          </div>
+        <div class="radioLanguage">
+          <div class="title">Language</div>
+          <div class="LanguageHolder">
+          <label>
+            <input type="checkbox" class="radio" value="en" name="fooby[2][]" />English</label>
+          <label>
+            <input type="checkbox" class="radio" value="hi" name="fooby[2][]" />Hindi</label>
+          <label>
+            <input type="checkbox" class="radio" value="pt" name="fooby[2][]" />Portugese</label>
+            </div>
+          </div>
+          </div>
+      </div>
+    </div>
+  <div class="searchContainers">
+<div class="tab">
+  <button class="tablinks active tweets">Tweets</button>
+  <button class="tablinks news">Top 10 News</button>
+</div>
+    <div class="tableHolder">
+      <table class="searchResults hideit">
+
+      </table>
+  </div>
+      <div class="buttonContainers">
+        <div class="buttonHolders">
+          <a pageNo="0" class="previous round">&#8249;</a>
+          <a limit="10" class="next round valid">&#8250;</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+  <div id="exTab3" class="visualGraphs">
+    <ul class="nav nav-pills">
+      <li class="active">
+        <a href="#1b" data-toggle="tab">Static Analysis</a>
+      </li>
+      <li><a href="#2b" data-toggle="tab" class="queryBasedAnalysis">Query Based analysis</a>
+      </li>
+      <li class="loader"></li>
+    </ul>
+    <div class="tab-content clearfix">
+      <div class="tab-pane active" id="1b">
+        <div class="graph-container">
+          <div class="sub-graph-container">
+            <div id="country_chart" class="graphs"></div>
+            <div id="language_chart" class="graphs"></div>
+            <div id="sentiment_chart" class="graphs"></div>
+          </div>
+          {{!-- <div id="timeline_chart" class="timelineGraph"></div> --}}
+        </div>
+      </div>
+      <div class="tab-pane" id="2b">
+        <div class="noData noDataVisible">No Analytic Data</div>
+        <div class="graph-container" id="analysisContainer">
+          <div class="sub-graph-container" id="queryBasedSubGraphContainer">
+            <div id="country_chart_query" class="graphs"></div>
+            <div id="language_chart_query" class="graphs"></div>
+            <div id="sentiment_chart_query" class="graphs"></div>
+          </div>
+          <div id="timeline_chart_query" class="timelineGraph"></div>
+          <div id="map" class="mapGraph mapGraphInvisible"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
